@@ -1,0 +1,23 @@
+{%  extends 'music/base.html' %}
+{% block body %}
+
+
+<h2>ALL Albums</h2>
+<ul>
+    {% for album in allalbum %}
+
+    <li>
+        <a href="{% url 'music:detail' album.id %}">{{ album.album_title }}</a>
+        <form action="{% url 'music:album-delete' album.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="delete" value="Delete">Delete</button>
+        </form>
+    <form action="{% url 'music:album-update' album.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="update" value="update">Update</button>
+        </form>
+    </li>
+    {% endfor %}
+
+</ul>
+{%  endblock %}
